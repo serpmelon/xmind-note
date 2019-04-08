@@ -3,3 +3,5 @@ config shortcuts
 
 config git
 	you should have installed git at local earlier, and press the 'configuration' button (at the left of the screen), search the keyword 'git.path', it`s value may be 'null' or something others, you can write the value to cover that on the user setting part(on the right of screen), such as "git.path": "D:\\a\\git.exe". at last, restart the vscode. now enjoy ~.~
+
+	heihei
