@@ -25,3 +25,20 @@ reset 什么意思？
 在某个文件夹下执行初始化
 git init
 之后会生成一个.git文件
+添加远端仓库地址
+git remote add <远端别名> <远端地址url>
+如：git remote add bank https://github.com/serpmelon/banksys.git
+拉取远端仓库
+git pull <别名>  <分支>
+如：git pull bank master
+这样就完成了本地仓库和远端仓库的关联和创建
+
+# git 免密码提交
+现在每次提交都要求输入用户及密码，现在设置一个地方存储用户名密码
+git config credential.helper store –file=.git_credentails. 
+这样设置了.gti_credentails文件用于存储密码，之后我们在提交或者拉取，输入一次用户名密码，以后就不需要再次输入了。
+
+# 修改当前项目提交者
+git config user.name name
+git config user.email xxx@xxx.com
+不写内容表示查看
