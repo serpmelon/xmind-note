@@ -21,3 +21,4 @@ A	eclipse-window-preferences-team-git-configuration中add entry，设置key为ht
 
 reset 什么意思？
 
+git 创建本地仓库
