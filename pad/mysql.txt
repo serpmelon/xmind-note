@@ -112,6 +112,14 @@ grant all privileges on db.table to 'username'@'host' identified by 'password' [
 查看用户权限
 show grants for 'username'@'host';
 
+创建数据库
+CREATE DATABASE database_name;
+
+创建表
+CREATE TABLE table_name(
+id varchar(32) primary key,
+
+)
 mysql-02
 mysqldump 执行报错 unknown option '--no-beep'
 在mysqldump后加 --no-defaults解决，问题原因还不知道
@@ -238,3 +246,4 @@ mysql调优
 6、尽量避免使用select *
 7、where、join、order by语句字段尽量被索引
 8、将大的DELETE，UPDATE or INSERT 查询变成多个小查询
+

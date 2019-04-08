@@ -293,3 +293,9 @@ make
 安装
 make install
 安装路径默认/usr/local/bin
+
+Linux info
+内存
+free
+硬盘
+df -lh  详见man df
