@@ -1,0 +1,61 @@
+@@@@ Collection
+since 20180130
+
+(ArrayList)
+qw/
+List, the toArray function is used to transfer list to array;
+<T> T[] toArray(T[] a) function :
+the same as above, returns an array containing all of the elements in the list in proper sequence; the runtime type of the returned array is that of the specified array; copy all of the elements in the list to the array if the length of a is bigger than the list, and fill the spare space with null.
+
+return ArrayStoreException if the type of array is not the supertype of the type of every element in this list;
+/
+
+qw/
+the 'remove(Object o)' function, the reason why the argument is 'Object' type but a 'E', in my opinoin is flexible, java use the 'equals' function to choose the object, we can override the 'equals' function in our Object so that wo can remove what we want.
+/
+
+qw/
+boolean addAll(int i, AiCollection<? extends E> c);
+at first, make sure the capacity is enough for the new list;
+secondly, move backward some places;
+at last, copy the new list to this list;
+eg:
+this list : [1, 2, 3, 4, 5];
+the new list : [6, 7, 8];
+if we call the list.addAll(2, newList), 
+then 
+0: enlarge capacity
+1: this list => [1, 2, 3, 4, 5, 3, 4, 5];
+2: copy
+3: this list => [1, 2, 6, 7, 8, 3, 4, 5]; 
+/
+
+qw/
+the 'delete' in list, in fact, just sets the elements to null, and then waits to GC to clear them;
+/
+
+qw/	@Q
+there is a question about the 'equals' function in AbstractList, this function judge if the two lists is one list; and then judge if the specified object`s type is 'list type'; thirdly iterate over both lists, comparing corresponding pairs of elements; at last if there is one of the lists has elements left that means their size is not the same, so they are not equal;
+here is a question, why do not we check their size earlier?
+somebody on website said the subclass of AbstrcatList may not get the size easily, so check size earlier is not appropriate for them(who actually?). but now, the functon is not appropriate for ArrayList, and no body fixes it, why?
+/
+
+20180708
+qw/
+if you remove a element of a list with the remove function of the list in a enhance for loop, the result is a exception, any method that will change the list`s structure will lead to that exception. you can only use the remove method of the list`s iterator to do that. Actually, the iterator`s remove method use the list remove method to remove elements, but in this procedure, the iterator move the cursor to the right location so that can not appear the scene that the element which is removed early will be launched the remove operate.
+/
+
+qw/
+if you use the Arrays.asList(T t) to return a list object, you might find that the list returned can not use add() and remove() function. Read the source of Arrays, you will find that the result of Arrays.asList(T t) is a ArrayList object, but this ArrayList is not the java.util.ArrayList, it is a inner class of the Arrays. The inner class ArrayList extends the AbstractList and do not implement the add() and remove(), so it throws a UnsupportedException if you use the function above;
+/
+
+qw/
+the LinkedList is a doubly-linked list, it has head node and tail node.  
+/
+
+
+xmind
+
+underlying implementation 底层实现
+qw/
+底层使用Object[]数组实现

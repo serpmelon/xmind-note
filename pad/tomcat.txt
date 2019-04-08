@@ -1,0 +1,25 @@
+#digester
+here is the process of parsing the server.xml
+// Configure the actions we will be using
+digester.addObjectCreate("Server",									// pattern
+                         "org.apache.catalina.core.StandardServer", // real class name
+                         "className");								// attributeName
+pattern means the 'Server' node, it will create a StandardServer object when the xml file matches the 'Server' node. The class StandardServer is the default Server in tomcat.
+
+When the digester create object, it will check the 'className'`s value, if the value is not null, the digester will create the object specified by 'className'`s value. If the value is null, the digester will generate the default Server 'StandardServer' object.
+
+digester会找Server节点有没有className属性，如果有，则会创建className指定的对象，如果没有则会创建默认对象StandardServer。
+
+digester.addSetProperties("Server");
+
+Execute the 'Server'`s setter. We can find the way that how to work in the source of digester.
+这句话就是执行Server节点的对应对象的set方法。在digester中可以看到源码。
+
+digester.addSetNext("Server",						// pattern
+                    "setServer",					// function name
+                    "org.apache.catalina.Server");	// parameter type
+
+This code means that executes the 'Catalina'`s setServer function, set the 'Catalina'`s Server to the default Server.
+这里执行就是将Catalina的Server设置为默认的Server，addSetNext源码的中可以看到，执行过程是：获取栈顶的第一个元素为子元素，获取栈顶的第二个元素为父元素，执行父元素的setServer方法，将子元素作为参数传入，参数类型就是上面代码中的类型。在这段中父元素就是Catalina，子元素就是StandardServer，父元素是在加载阶段
+digester.push(this);
+将Catalina加载到栈顶的。子元素是在执行addObjectCreate方法的时候，在创建新对象后，会将新对象推到栈顶。

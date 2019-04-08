@@ -1,0 +1,13 @@
+since 20180817
+
+chapter 7	the mechanism of class loader in jvm
+
+the procedure is :
+loading -> verification -> preparation -> resolution -> initialization -> using -> unloading
+
+preparation
+	1、memory allocation
+
+add 20180830
+chapter 8
+	jvm(actually, this shuld be compiler) invoke the overload method that depends on the static type of the parameters, not the actual type. 

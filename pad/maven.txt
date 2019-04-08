@@ -1,0 +1,24 @@
+Maven Coordinates
+	gourpId:
+		It means a project or a organization. eg org.apache.maven
+	artifactId:
+		The project`s name, people will know the project from the artifactId.
+	version:
+		just version.
+	packaging:
+		The type of the result that project will be packaged. We can declare a war packaging. When no packaging is declared, Maven assumes the packaging is the default jar.
+
+POM Relationships
+	Dependencies:
+		The dependency list.
+		scope: 依赖一共做三件事，编译、执行、打包。以依赖A为例
+			compile:
+				This is a default scope, 表示A会参与编译、执行，最终会被打进包中。
+			provided:
+				从字面上看就是已经被提供的，A已经被其他方提供，A最终不会被打进包里。
+			runtime:
+				与compile相似，只是不会参与编译。
+			test:
+				只参与测试相关工作，不会被打进包中。
+			system:
+				与provided相似，不会被打进包中，会从本地系统获取，需要指定systemPath属性来指定获取路径

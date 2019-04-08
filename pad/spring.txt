@@ -1,0 +1,116 @@
+首先创建了controller如下：
+
+@RestController
+public class HiController {
+
+	@Autowired
+	private ServiceI service;
+
+	@RequestMapping("/")
+	public String hi() {
+
+		String ss = service.getSth();
+		return ss;
+	}
+}
+
+代码中声明了ServiceI接口，该接口代码如下：
+
+public interface ServiceI {
+
+	String getSth();
+}
+
+创建接口的实现类
+@Service
+public class ServiceImpl implements ServiceI {
+
+	@Override
+	public String getSth() {
+		return "serviceImpl";
+	}
+}
+
+spring会扫描拥有@component的类（@service是@component的子类），然后在使用它实现的接口的时候将实现类注入到接口中。所以在controller中没有实例化ServiceI接口就可以用它的方法。
+
+当存在多个实现类的时候，加入存在ServiceImpl_2
+@Service()
+public class ServiceImpl_2 implements ServiceI {
+
+	@Override
+	public String getSth() {
+
+		return "service222222";
+	}
+}
+
+这时候再启动服务器就会报错，提示有多个实现类，spring不知道在controller中使用哪个实现类。这时候可以标明我们要使用的实现类，service类修改如下
+@Service("service1")
+public class ServiceImpl implements ServiceI {
+
+	@Override
+	public String getSth() {
+		return "serviceImpl";
+	}
+}
+@Service("service2")
+public class ServiceImpl_2 implements ServiceI {
+
+	@Override
+	public String getSth() {
+
+		return "service222222";
+	}
+}
+我们在@service中标明了这几个实现类的名字，所在在使用的时候就可以指定使用哪个实现类
+
+@RestController
+public class HiController {
+
+	@Autowired
+	@Qualifier("service2")
+	private ServiceI service;
+
+	@RequestMapping("/")
+	public String hi() {
+
+		String ss = service.getSth();
+		return ss;
+	}
+}
+
+@qualifier注解表明我们要使用service名字为service2的实现类。这时候启动项目不会报错，并会返回service2中的内容
+
+#非web项目使用spring
+在resources下添加配置文件applicationContext.xml，内容大致如下：
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <!-- 扫描根目录 -->
+    <context:component-scan base-package="com.togo.tigeradar">
+    </context:component-scan>
+</beans>
+
+获取bean需要将类声明为bean，使用注解@Component（@Controller等不合适）。
+	ApplicationContext act = new ClassPathXmlApplicationContext("applicationContext.xml");
+	Tigeradar bean = (Tigeradar) act.getBean("id");
+这里的ID为@Component中声明的id，如果没有声明，则按照下面规则生成默认ID：
+1、如果类名前两个字母都为大写字母，则id为类名
+2、否则则将类名首字母改为小写，生成id。
+
+
+
+
+
+
+

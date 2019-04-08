@@ -1,0 +1,12 @@
+命令
+    哈希表 一个key对应一个对象，一个对象中又是一组键值对key:map
+        设置
+        hset key field value
+        获取
+        hget key field
+        是否存在
+        hexists key field
+        展示key下的所有键值对
+        hvals key
+    列表
+    集合(set)

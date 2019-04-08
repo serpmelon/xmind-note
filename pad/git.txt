@@ -1,0 +1,23 @@
+目前创建了三个分支master、qhd、zjk，用于解决秦皇岛网站和张家口网站问题。所有公共部分放到master分支，独有部分放到各自的分支；
+切换分支命令：
+	git checkout branchname;
+eg：
+	正常操作，基础代码都在master中开发，特殊代码分别在各个分支开发；
+	基础代码开发完提交到远端；各个分支merge master；
+	git checkout qhd; // switch to qhd
+	git merge master; // merge master
+	如果有冲突则修改冲突，并提交到qhd分支；
+
+	zjk独有短信操作，现在秦皇岛也要有，完全一样，则将短信功能作为基础功能处理；merge到master中；
+
+	git checkout master;
+	git checkout zjk src/main/java/qhd/Sms.java
+	// 如果是目录则git checkout zjk src/main/java/qhd/
+
+
+
+Q	eclipse报错信息为cannot open git-upload-pack
+A	eclipse-window-preferences-team-git-configuration中add entry，设置key为http.sslVerify，值为false，然后apply，就解决了
+
+reset 什么意思？
+

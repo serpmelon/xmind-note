@@ -1,0 +1,164 @@
+20180629之前的记录
+	Q1：
+	秦皇岛网站
+	IE9浏览图片不显示
+	网站显示IDE图片是由后台以流的形式返回到网站前台的，在返回这里没有指定Content-Type类型，以IE严谨的个性这样显然是不能显示的，所以我们在响应中增加ContentType类型为对应的图片类型，前台就可以正常展示了。
+	Q2：
+20180629:
+	Q1:
+	网站在打开首页之后，再打开申报页面，点击上传按钮不会弹出上传文件的modal框，js报错表示没有modal这个方法，导致的原因是jQuery加载的问题。首先modal是bootstrap的方法，bootstrap依赖于jQuery，所以jQuery的加载顺序在bootstrap之前。在index.html页面加载中我们的确是把jQuery1.9.1放在最前面，但是在welcome.html页面，为了显示背景轮播图，又引入了一次jQuery(其实可以不同引入)删除这里的jQuery，并把其他的js(轮播图需要的js)的引入全部放在index.HTML中。修改之后js报错表示轮播图需要的方法jQuery中没有，我们项目中使用的jQuery是1.9.1，轮播图使用的是1.8.3，而我们项目中使用的bootstrap要去jQuery必须大于等于1.9.1，所以我们必须用jQuery1.9.1。根据报错信息，在轮播图需要的js中找到了报错的地方，这个地方是为了兼容IE6执行了一些方法，我们项目IE8都不支持，要什么IE6，直接删除，至此BUG修改完毕。
+20180702
+	Q1:
+	JPA启动报错，org.hibernate.tool.schema.extract.spi.SchemaExtractionException: More than one table found in namespace (, ) : ac01
+	系统中只有一个ac01实体。这个报错是因为，在application.yml配置文件中没有配置jpa的相关属性，导致jpa会去数据库中创建ac01表，但是数据库中已经存在ac01表，所以会报上述错误。在配置JPA的地方，设置JPA的属性generate-ddl为false，则表示不自动创建表。
+	Q2:
+	JPA blob字段映射实体文件写法如下：
+		@Lob
+		@Column(length=100000)
+		private byte[] aac01p;
+20180703
+	Q1：
+	IE、360兼容模式某个按钮跳转链接跳转后显示空白页，地址栏显示：res://ieframe.dll/dnserror.html。百度结果显示是因为get请求发送的参数过长导致的，经测试发现不是这个原因。JS中的跳转代码如下：$location.path("/xx/xx"); 其他跳转都正常只有这里跳转不正常，查看HTML文件代码，发现a标签的target属性的值为"_target",这样导致页面打开新页面跳转，但是在新页面中无法解析 "/xx/xx"这样的路径，修改target属性为"_self"，跳转正常。
+20180705
+	Q1:
+	JPA保存报错，使用自带的save(entity)方法，数据库mysql，实体没问题，可以查询。将控制台打印的SQL拿出来放到数据库中执行也报错，感觉特别奇怪，SQL是JPA生成的，实体也没问题。最后发现一个字段比较奇怪，virtual，查了一下，果然是个关键字。所以才会报错，在实体中设置该字段为关键字
+	@Column(name = "[virtual]")
+	private String virtual = "0";
+20180706
+	Q1:
+	这个是政务通的bug，其实也不是bug~是这样，用户进入页面，清楚session，用户点击查询按钮，页面会一直显示查询中，这里是因为政务通没有对请求后台做拦截，导致在没有session的情况下，没有返回结果（这个明天在确认下）。为了解决这个问题，首先创建了一个session拦截器，拦截请求*.svc，然后对于session中没有用户ID的认为session过期，返回403，然后前台js获取到403后作出统一处理，跳转到登陆页面。原来一直觉得ajax请求也可以像请求页面那样，在web.xml中配置403的错误页面，拦截器返回403这个请求就可以自动跳转到错误页面，显然对于ajax请求是不行的~~创建一个ajax的统一错误处理JS，所有页面都加载了这个JS，然后删除了之前的error处理，这里也有一个问题，不知道统一的返回结果有没有什么影响，如果有的话，就在统一处理这里加就可以，实在不行可以在特殊页面加入error处理，不会覆盖统一处理。两个error都会执行。
+
+	Q2(incomplete)：
+	部分页面会出现query两次的情况，比如即办件办理列表页面这里需要修改；
+20180707
+	Q1(incomplete):
+	吉顺这里APP请求后台出现bug，部门列表点击部门，跳转到具体部门列表，然后浏览器后退，再次点击部门，浏览器会打开新窗口，之前的窗口数据加载正确。问题是因为在点击事件的地方，使用a标签，target属性为_blank，所以会打开新窗口。现在的问题是，为什么第一次不会打开窗口，第二次才会打开？
+
+	补充：a标签中如果有href和点击事件的话，先执行点击事件，然后执行href，如果事件返回false则不执行href。
+20180710
+	Q1(incomplete):
+	大BUG！现场服务器，SQL写错导致MYSQL直接崩盘~服务器显示某个挂载点满了(文件系统/dev/mapper/centos-root  挂载点  /)，一共50G全部满了。咨询李贺，他的意思是mysql应该放在home下，因为这个挂载点有1.6T，我的路径为/usr/local/mysql ，他说这个路径会占用根路径，这个我等会查一下。所以现在就是等有时间修改下现场的mysql路径。
+20180712
+	Q1:
+	zwt项目，打包后为zwt.war包，部署到tomcat下，项目访问路径为xxx:8080/zwt/xxx，现在想修改zwt为具体项目(qhdxzsp)。
+	修改tomcat的server.xml文件，在host下增加
+20180719
+	Q1 ?：
+	网站，网上申报，当申报事项只有一个材料（是材料不是说只上传一个附件），申报上去的材料信息会有问题：申报材料以数组形式在页面存储并发送，代码如下：
+	$http({
+			method: 'post',
+			url: '/qhd_www/zxbs/V0/grbs/info',
+			data: $scope.addItem,
+			params:{
+				'materials': grbsService.sbcls,
+				'deptcode': grbsService.deptcode,
+				'deptName': grbsService.sljgName,
+					}
+		})
+	后台接收代码如下：
+	public Result saveItemInfo(@RequestBody ZxsbForm form,
+		@RequestParam(value = "materials", required = false) String[] materials,
+		@RequestParam("deptcode") String deptcode,
+		@RequestParam(value = "deptName", required = false, defaultValue = "") String deptName,
+		HttpServletRequest request)
+	当材料为一个时，materials在后台接收到的是一个以“逗号”分割的数组，即把一个完整的材料信息以逗号分割为多个信息，导致后面的json解析错误。
+	当材料为多个的时候，materials中获取到的就是正常的数组信息。
+	还没有找到造成这样的原因?
+	解决方法：
+		在ZxsbForm中增加一个属性Object[] materials,然后页面传值的时候将materials放到ZxsbForm中一起传，如下：
+		$scope.addItem.materials = grbsService.sbcls;
+		$http({
+			method: 'post',
+			url: '/qhd_www/zxbs/V0/grbs/info',
+			//traditional: true, //traditional 为true阻止深度序列化
+			data: $scope.addItem,
+			contentType: "application/json; charset=utf-8",
+			params:{
+				//'materials':grbsService.sbcls,
+				'deptcode': grbsService.deptcode,
+				'deptName': grbsService.sljgName
+					}
+		})
+	这样在后台可以通过如下代码获取：
+
+	public Result saveItemInfo(@RequestBody ZxsbForm form, @RequestParam("deptcode") String deptcode,
+      @RequestParam(value = "deptName", required = false, defaultValue = "") String deptName)
+      throws JSONException {
+      Object[] materials = form.getMaterials();
+
+20180803
+	Q1：app访问政务通服务器，一段时间之后会报错，显示连接池超时。
+	原因是httpclient连接池每次使用后没有关闭，导致一段时间后连接池全部用完，出现连接池超时现象。
+
+	Q2：wex5框架下载附件，必须下载http可以直接访问到的资源（目前没有找到可以通过流来下载文件的方法），也就是说在浏览器直接输入地址可以下载，这样的地址。
+	目前解决办法，在tomcat的server.xml配置文件中配置一个context，如下，将附件地址映射到一个地址下，用户可以通过浏览器直接访问映射地址访问到附件(比如http://localhost:8080/file/xxx.jpg)。
+	 <Host name="localhost"  appBase="webapps"
+            unpackWARs="true" autoDeploy="true">
+            <!-- 下面这行 -->
+            <Context docBase="/opt" path="/file"></Context>
+
+        <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
+               prefix="localhost_access_log" suffix=".txt"
+               pattern="%h %l %u %t &quot;%r&quot; %s %b" />
+
+      </Host>
+   相当于将tomcat作为一个静态服务器。
+
+20180808
+	Q1:213服务器启动政务通系统，选择工作流系统，打开工作流模板页面，出现卡死。
+	原因：观察服务器日志，发现在打开页面的时候CPU和内存占用都会上升，在某一时刻会卡死，报错内存溢出，使用jmap -heap pid命令，发现java程序的内存已经达到99%以上，所以会造成内存溢出。因为程序在别的服务器和本地都不会出现问题，所以问题应该是在内存配置这里。查看tomcat的启动文件catalina.sh其中有语句
+	JAVA_OPTS="-server -Xms128m -Xmx256m -XX:MaxPermSize=256M -XX:PermSize=128M -Djava.awt.headless=true"
+	这里设置了启动的JVM参数，256M对于现在的系统太小了，所以造成内存溢出，如果不设置，会默认采用服务器内存的固定百分比（具体多少忘记了，后面补）。这里目前去掉这条语句，使得tomcat启动使用默认参数。问题解决。后面需要补充一份JVM参数的文章。我想学技术，不想当秘书~~
+
+20180910
+	Q1:zwt项目中上下文路径为zwt，想修改为自定义上下文。
+	一个是在tomcat中配置了
+	<Context docBase="zwt" path="/zwt" reloadable="true" source="org.eclipse.jst.j2ee.server:zwt"/>
+	docBase指定项目位置；path指定访问路径；source为eclipse生成的；
+	这里我们修改path中的zwt为自定义名称。然后在项目中修改路径为/zwt/的部分；
+	以后要注意，在页面部分不要写死根路径，应该使用变量。
+
+20180917
+	Q1：政务通项目统计报表，一个SQL，在家里执行没问题，替换到现场后执行报错，最后发现是两个数据库的版本差异导致的，修改了现场的配置文件。具体的解决方法在“mysql.txt”中。
+
+20181213:
+	Q1：在事项配置中有配置事项和环节到个人的功能，在承诺件中没有出现问题，在即办件中就无法查出对应的人员。查看SQL发现是bt_activity表中的ACT_NAME中的值与t_station中的STATION_NAME的值对应不上。这里查询逻辑是：
+		从bt_activity表中获取当前模板对应的各个节点，以及节点名称(ACT_NAME)，然后找用户，条件是用户的岗位名称(STATION_NAME)等于节点名称(ACT_NAME)。
+	这里出现一个严重的问题，ACT_NAME是我们在画流程模板的时候手动输入的，不能保证和岗位名称一致，即办件开始查不出人，也是因为两个名称不一样导致的。所以这里目前的解决办法就是在画模板的时候一定要注意。后续会查一下节点和岗位的对应关系(在画模板的时候的确是选择了岗位的)。
+
+20181225:
+	Q1：业务系统出现某个环节查询不到待办件的情况，比如A办件审查通过后，在审批环节看不到，但是在审查已办可以看到。
+	解决步骤(以下步骤以上述例子为例)：
+		1、检查用户是否有查看该办件的权限：用户应该已经拥有领导审批的角色了(如果没有你确定不是在搞笑~.~)，检查用户是否拥有领导审批岗位，没有则看不到；有则检查子项配置处(就是事项配置到人的地方)，该用户是否可以审批该事项，没有则看不到；有则继续检查。
+		2、根据appuid查询日志表查看办件状态dealstate
+		SELECT * FROM apprt_proc_workitem WHERE APPUID = 'xxx'
+		监察审查通过后的办件状态，如果不是审查通过则有问题。
+
+20190101:
+	Q1：之前胡猛做短信轮询的功能，启动定时器周期执行service中的代码，轮询功能可以正常执行打印语句，但是在操作数据库的时候总是获取不到数据库操作对象。
+		开始胡猛使用的是new service的方式，之前记得这种方式并不总是好使的，应该使用servicemanager的方式获取（也就是项目中ServiceFactory的方法），尝试之后还是不行。
+		查询帮助文档，在数据库对象篇章看到了获取对象的方式如下：
+		JdbcDataAccessObject dpo = SystemManager.getInstance().getDataPersistenceManager().getDataAccessObject("dataSourceName");
+		这里的DataSourceName指的数据源名称，在配置文件中看到一个数据源名称比较像ADAM，使用上述方式成功。
+20190116：
+	Q1：206上zwt换了数据库连接到新装的213数据库，启动没有问题，在运行中（分页查询）出现sql报错，经过姜坤调试，发现是SQL中出现了一个全角的空格，去掉空格后重新编译后没有问题了。但是原来的数据库并没有出现这些问题，所以还是新安装的数据库存在问题。在现场11服务器也新安装了数据库，在部署新的测试环境时也出现了上述问题。首先程序肯定没有问题，已经运行很长时间了。但是全角问题确实存在，所以把问题定位到数据库编码上。
+	通过
+	show variables like 'character%';
+	检查各个数据库差异，发现character_set_server的值不一样，233数据库是utf8，而新创建的两个数据库都是latin1。问题可能出现在这里，在mysql配置文件中加入
+	character_set_server=utf8
+	然后重启服务，问题解决。
+
+20190121:
+	Q1：关于dxp传输中遇到的权限问题；胡猛和吉顺搭建了dxp链路从15传输附件到12上，用户是root。在传输过程中，出现权限问题。每次新创建文件夹，会把该文件夹权限设置为777，否则在传输过程中会报没有目录权限。由于15上面是由各个区县上传的附件，所以为了满足业务为各个区县搭建了sftp，每个区县有各自的用户，每个用户有自己的目录。不同用户之间不能操作其他目录，即能看到但是不能进入目录。
+
+	为了达到这个目的，需要设置目录的权限，以用户A、B，目录D为例。D是A的目录，所以B用户不能访问D目录。设置D目录的所有者为A，并将权限设置为700，如果用户没有目录的可执行权限，则无法访问目录。这样设置之后，发现DXP还是无法传输。
+
+	开始觉得是传输使用的root用户没有该目录权限（其实有的），将目录组设置为root，再次尝试还是失败。最后想起来DXP传输好像有专门的用户，通过搜索关键字dxp发现了两个用户，qhddxp和dxp。分别设置目录组为二者，发现dxp传输使用的是qhddxp用户组。所以最终目录D的权限为770，owner为A，group为qhddxp。
+	Q2：文件打开过多
+
+20190123:
+	Q1：jpa解析实体过程中将驼峰命名变量解析为“_”下划线，即abcDefGh会解析为abc_def_gh。但是数据库中的字段不是这个，所以在执行SQL的时候会报错（jpa自己解析后的sql，字段按照上述规则解析）。解决该问题需要修改解析规则即可
+	spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl 
+	上面就是修改了hibernate的命名规则
+	org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl  无修改命名
+	org.hibernate.boot.model.naming.SpringPhysicalNamingStrategy	遇到大写字母修改为“_”

@@ -1,0 +1,11 @@
+20181202
+net:
+  description:
+    The net command is a command that can be used to manage almost any aspect of a network;
+  use:
+  	start:
+  	  To start a service, eg net start mysql, means to start mysql service.
+  	TO-ME:
+  	  It is said the service name is invalid when i use the net command to start mysql service, the command line is like 'net start mysql'. So i find the solution online, people said that`s true, the service name is actually invalid, and you should find the valid service name with 'services.msc' in CMD. And i find out the mysql service name is 'mysql57' actually, so i start the service with 'net start mysql57', and it works.
+  	stop:
+  	  the same as above;

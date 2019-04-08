@@ -1,0 +1,5 @@
+引入<groupId>com.alibaba</groupId>
+<artifactId>druid-spring-boot-starter</artifactId>
+一直报错，一个本来有的类就是引入不进来，查询maven发现，druid版本为1.1.9对应的springboot为2.*，工程中用的springboot为1.5.*，修改druid版本为1.1.0，报错解决；
+等会解决多数据源配置
+

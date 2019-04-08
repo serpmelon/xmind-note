@@ -1,0 +1,159 @@
+12345!@#$%qwert
+
+192.168.67.232	
+root	Neuqsoft2016
+192.168.67.231	
+root	Neuqsoft2016
+
+http://192.168.67.231:9999/EAPDomain
+
+10.233.78.10
+root chrdw@3651935 qhdzwzx-1 hdhxt@3651935	外网映射 121.22.127.18
+
+所有的项目都在/work/ 下，project为业务项目， tool为工具，mysql-bk为业务正式库备份文件，每天会定时从10.232.114.13发送到这里。
+修改mysql-bk到/home/mysql/下，因为/下空间不够大，只有50G。以后需要注意，尽量把东西放到/home下，有600G。
+
+// 秦皇岛开发库
+192.168.67.233
+  hlwzwfw
+  hlwzwfw1
+
+  root
+  Neuqsoft2016
+
+  sonar       // sonar平台使用的用户
+  imkppMB3idD9bYsB
+
+home test server
+
+172.30.4.216
+ubuntu/ubuntu
+root/rootroot
+
+172.30.4.206
+ubuntu/ubuntu
+root/rootroot
+
+
+秦皇岛现场
+  1、数据库访问地址：10.232.114.20，实例名：orcl
+        业务用户/名称：qhdxzsp/qhdxzsp    qhdwebdb/qhdwebdb
+
+  2、应用系统服务器地址：10.232.114.10、10.232.114.11、10.232.114.12 10.232.114.15
+     用户名/密码：root/12345678
+    操作系统 CentOS
+
+
+172.30.4.211
+S-ZW-APP-HGTG-0\Administrator
+1qaz!QAZ
+
+河北政务网
+joint测试账户
+qihuangdaotest
+hbzwfw@2017
+法人账户
+hjx123
+mofei6140
+
+10.232.114.15 
+mysql 4406
+	root/Neuqsoft@2018
+  开发区使用用户
+	hlwjzwfw_kfq/hlwjzwfw_KFQ1				        
+    虚拟大厅业务使用用户,里面的表结构是通过DXP将业务库的数据导过来的；
+	hlwjzwfw_xndt/mizjZXaDlkS89iML@			      
+    虚拟大厅dxp使用用户，将业务库中的数据导入到虚拟大厅库中；
+	hlwjzwfw_xndt_dxp/8UvszKXMeEXWiXuW@       
+    事项库，区县用
+  hlwjzwfw_sxk/wg2wXBsh5BCjdkST@              
+    人设用pre库 
+  qhd_re_pre/qhd_re_PRE1 
+  市规划局
+  hlwjzwfw_sghj/hlwjzwfw_SGHJ1   
+
+  sftp账号
+  开发区
+  user_kfq
+  1234qwer!@#$QWER
+
+  市民网
+  user_smw
+  7890uiop&*()UIOP
+
+10.232.114.11
+
+/home/mysql
+root
+2aXEmMePfOZROAYS@
+
+hlwjzwfw_qhd
+hm2W4wHC8T7bqBHI@
+
+10.232.114.13
+
+现场数据库备份文件放到10.232.114.13 /home/work 下
+
+现场数据库13
+/usr/local/mysql
+10.232.114.13:3306
+hlwjzwfw_qhd/ZMDTHMoL4amCdK8B
+root/Neuqsoft2018
+hlwjzwfw_qhdxzsp_web/hlwjzwfw_qhdxzsp_web1(网站)
+
+备份脚本在
+/home/mysql/shell 下
+hlwj_qhd_prod_bk.sh为正式库备份脚本
+scpSqlTo78-10.sh为将备份复制到10.233.78.10服务器脚本
+
+10.232.114.14
+administrator/hebca@123456
+
+
+虚拟大厅
+后台
+http://10.232.114.14:90/admin/Main.aspx
+admin/admin123
+
+ems用户密码
+ems
+Mhj6lOeAa1D5o814
+
+172.30.4.213
+root
+tynghjklGHJKL@
+数据库 7706
+root
+1234561
+
+秦皇岛现场登陆的QQ号
+2672219783
+neuqsoft2018!@#$
+
+秦皇岛现场机器teamviewer
+1180618224
+neuqsoft@2019@
+
+172.30.4.210
+root/root@210
+
+172.30.4.221
+root/root@221
+
+       
+张家口测试环境为10.8.101.34
+
+政务通部署路径为:
+/home/apache-tomcat-8.0.51/webapps
+内网访问网址    
+http://10.8.101.34:18080/zwt
+政务外网访问网址
+http://10.200.10.11:5008/zwt
+--------------------------------------------------------------------
+网站部署路径为: 
+ /home/zjk-www
+网站内网访问网址
+http://10.8.101.34:18081/zjk_www/index.html#/welcome  
+网站外网访问网址
+http://10.200.10.10:18081/zjk_www/index.html#/welcome 
+zwt备份文件放这
