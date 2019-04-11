@@ -83,6 +83,4 @@ redis
 
 算法和数据结构
 
-
-
-UPDATE `hlwjzwfw_qhd`.`pz_loginpage_info` SET `consoleTitle`='秦皇岛市政务服务业务办理系统' WHERE (`id`='2');
+熟悉一个垃圾回收器hotspot中的
