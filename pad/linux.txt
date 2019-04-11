@@ -299,3 +299,30 @@ Linux info
 free
 硬盘
 df -lh  详见man df
+
+修改ip地址
+在目录/etc/sysconfig/network-scripts/ 下
+找到需要修改的文件，一般为第一个ifcfg-ens33（名称可能不一样）
+TYPE=Ethernet
+BOOTPROTO=static   # 这里默认是dhcp动态获取，改为static，表示静态获取，否则不生效
+DEFROUTE=yes
+IPV4_FAILURE_FATAL=no
+IPV6INIT=yes
+IPV6_AUTOCONF=yes
+IPV6_DEFROUTE=yes
+IPV6_FAILURE_FATAL=no
+NAME=eno16777736
+UUID=9e8d604f-d991-4aa2-88a3-4c679e6f139c
+DEVICE=eno16777736
+ONBOOT=yes
+PEERDNS=yes
+PEERROUTES=yes
+IPV6_PEERDNS=yes
+IPV6_PEERROUTES=yes
+HWADDR=00:0c:29:ce:3f:3c  #MAC地址  可以不配置
+IPADDR=192.168.1.104     #静态IP   
+GATEWAY=192.168.1.2     #默认网关
+NETMASK=255.255.255.0    #子网掩码
+DNS1=192.168.1.2         #DNS配置   可以不配置
+
+虚拟机修改为桥接模式，在VMware中将虚拟机的网络配置修改为桥接，桥接网络选择宿主机正在使用的网络，然后按照上述的步骤固定虚拟机ip地址
