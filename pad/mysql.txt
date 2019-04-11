@@ -84,7 +84,7 @@ set sql_mode='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISIO
 之后执行SQL的确没问题，但是新建查询后查询又失败了，网上说这样的设置只能修改本次session的，新建窗口查询sql_mode的确没有删除ONLY属性。
 尝试第二个方法，配置文件中修改，找到服务器上的配置文件（/etc/my.cnf），增加语句：
 set sql_mode='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION'
-关闭mysql，开启mysql报错（距离工作人员办公还有不到二十分钟。。。），查看mysql日志（配置文件中有些地址），发现是配置文件错误，修改配置文件，将语句：
+关闭mysql，开启mysql报错（距离工作人员办公还有不到二十分钟。。。），查看mysql日志（配置文件中有地址），发现是配置文件错误，修改配置文件，将语句：
 set sql_mode='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION'
 修改为（多个set）：
 sql_mode='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION'
