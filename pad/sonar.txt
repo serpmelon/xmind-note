@@ -1,0 +1,31 @@
+安装路径172.30.4.213  /work/tool/sonar
+
+安装sonarQube
+1、下载好安装包
+2、安装好java和maven
+3、sudo sh bin/sonar.sh console
+4、报错
+5、在logs中有很多日志，在es.log中发现报错can not run elasticsearch as root。嗯，之前都是sudo执行，因为不加sudo会有很多没有权限，当时没有想那么多就直接执行了，现在报错了那就修改文件权限，sudo chown -R user:group sonarDIR。
+6、继续执行报错，在web.log中发现是数据库端口占用，将占用端口应用停掉
+7、继续执行成功，访问9000可以看到界面，用户名/密码 admin/admin
+
+
+maven配置
+在配置文件setting.xml中增加如下配置
+<profile>
+    <id>sonar</id>
+    <activation>
+        <activeByDefault>true</activeByDefault>
+    </activation>
+    <properties>
+       <sonar.jdbc.url>jdbc:mysql://192.168.67.233:3306/sonar</sonar.jdbc.url>
+       <sonar.jdbc.driver>com.mysql.jdbc.Driver</sonar.jdbc.driver>
+       <sonar.jdbc.username>sonar</sonar.jdbc.username>
+       <sonar.jdbc.password>imkppMB3idD9bYsB</sonar.jdbc.password>
+       <sonar.host.url>http://172.30.4.213:9000</sonar.host.url>
+    </properties>
+</profile>
+
+提交项目到sonarQube
+在项目下执行
+mvn sonar:sonar

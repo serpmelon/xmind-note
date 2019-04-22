@@ -83,4 +83,11 @@ redis
 
 算法和数据结构
 
-熟悉一个垃圾回收器hotspot中的
+熟悉一个垃圾回收器hotspot中的， CMS G1 可以从console中看到的两个回收器
+
+
+#面试题
+1、使用数组实现队列
+2、实现栈
+3、实现类加载器
+4、Collections.sort怎么实现的
