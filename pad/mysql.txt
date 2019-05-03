@@ -120,7 +120,7 @@ CREATE TABLE table_name(
 id varchar(32) primary key,
 
 )
-mysql-02
+
 mysqldump 执行报错 unknown option '--no-beep'
 在mysqldump后加 --no-defaults解决，问题原因还不知道
 
@@ -212,7 +212,7 @@ mysql编码
 
 show variables like 'character%';
 
-展示mysql的编码，已办如下：
+展示mysql的编码，一般如下：
 // 设置客户端使用的字符集
 character_set_client	utf8
 // 设置连接数据库时的字符集
@@ -247,3 +247,6 @@ mysql调优
 7、where、join、order by语句字段尽量被索引
 8、将大的DELETE，UPDATE or INSERT 查询变成多个小查询
 
+
+mysql-02
+索引：每种查找算法都只能应用于特定的数据结构之上，例如二分查找要求被检索数据有序，而二叉树查找只能应用于二叉查找树上，但是数据本身的组织结构不可能完全满足各种数据结构（例如，理论上不可能同时将两列都按顺序进行组织），所以，在数据之外，数据库系统还维护着满足特定查找算法的数据结构，这些数据结构以某种方式引用（指向）数据，这样就可以在这些数据结构上实现高级查找算法。这种数据结构，就是索引
