@@ -38,6 +38,10 @@ spring
 		面向切面编程
 	@@ springboot的优势是什么？
 
+	spring怎么保证并发安全
+
+	spring怎么保证事务的
+
 jdk
 	collection
 		@@ HashMap
