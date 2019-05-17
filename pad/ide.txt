@@ -1,0 +1,11 @@
+快捷键
+	自动实现父类代码
+		光标在类上，alt + enter
+	全文查找
+		crtl + shift + f
+	类查找
+		crtl + n
+	文件查找
+		crtl + shift + n
+	代码回到上次浏览位置
+		crtl + alt + 左右
