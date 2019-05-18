@@ -9,3 +9,9 @@
 		crtl + shift + n
 	代码回到上次浏览位置
 		crtl + alt + 左右
+
+Q1	git clone下来的代码不能运行，发现是没有设置源目录，在file -> project structure -> modules 中将src中的java文件设置为source文件。
+
+Q2	运行文件报错：没有输出文件。在modules中path下指定，选择use module compile output path，将目录指到target/classes
+
+Q3	通过设置警告级别可以消除代码上面的警告，比如method never used这样
