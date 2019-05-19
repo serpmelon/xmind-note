@@ -15,3 +15,5 @@ Q1	git clone下来的代码不能运行，发现是没有设置源目录，在fi
 Q2	运行文件报错：没有输出文件。在modules中path下指定，选择use module compile output path，将目录指到target/classes
 
 Q3	通过设置警告级别可以消除代码上面的警告，比如method never used这样
+
+Q4	插件安装显示无法加载，原因是idea的安全机制导致网络问题，在设置中appearance&behavior > system settings > updates中勾掉use secure connection选项。重启后插件显示正常
