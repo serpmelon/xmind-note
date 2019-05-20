@@ -9,3 +9,12 @@
 		crtl + shift + n
 	代码回到上次浏览位置
 		crtl + alt + 左右
+	查看接口的实现方法
+		crtl + alt + click
+
+错误解决
+	xml配置文件中出现 uri is not registed
+		网上两种解决办法：
+			1、通过Schemas and DTDs配置，将错误忽律
+			2、通过idea提示执行fetch。
+			我这里使用第二种
