@@ -34,13 +34,13 @@ spring
 			IOC是控制反转，指的是原来由客户端创建对象的工作交给spring来做。
 		DI
 			DI是依赖注入，指的是在控制反转创建对象中将该对象中的依赖注入其中。依赖注入方式有：构造方法注入<constructor-arg>，set方法注入<property>。
-	AOP
+	@@ AOP
 		面向切面编程
 	@@ springboot的优势是什么？
 
-	spring怎么保证并发安全
+	@@ spring怎么保证并发安全
 
-	spring怎么保证事务的
+	@@ spring怎么保证事务的
 
 jdk
 	collection
@@ -54,7 +54,7 @@ jdk
 
 	@@ 线程池架构
 
-	@@NIO和普通IO区别
+	@@ NIO和普通IO区别
 
 @@ 分布式
 	@@分布式锁
@@ -80,7 +80,7 @@ tomcat
 
 	@@session管理
 
-@@Nginx
+Nginx
 	为什么可以作为负载均衡服务器
 
 redis	
