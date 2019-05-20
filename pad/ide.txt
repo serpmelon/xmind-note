@@ -9,6 +9,15 @@
 		crtl + shift + n
 	代码回到上次浏览位置
 		crtl + alt + 左右
+	查看接口的实现方法
+		crtl + alt + click
+
+错误解决
+	xml配置文件中出现 uri is not registed
+		网上两种解决办法：
+			1、通过Schemas and DTDs配置，将错误忽律
+			2、通过idea提示执行fetch。
+			我这里使用第二种
 
 Q1	git clone下来的代码不能运行，发现是没有设置源目录，在file -> project structure -> modules 中将src中的java文件设置为source文件。
 
@@ -17,3 +26,4 @@ Q2	运行文件报错：没有输出文件。在modules中path下指定，选择
 Q3	通过设置警告级别可以消除代码上面的警告，比如method never used这样
 
 Q4	插件安装显示无法加载，原因是idea的安全机制导致网络问题，在设置中appearance&behavior > system settings > updates中勾掉use secure connection选项。重启后插件显示正常
+
