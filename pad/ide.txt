@@ -10,7 +10,9 @@
 	代码回到上次浏览位置
 		crtl + alt + 左右
 	查看接口的实现方法
-		crtl + alt + click
+		crtl + alt + click/b
+	选中光标代码
+		crtl + w
 
 Q0	xml配置文件中出现 uri is not registed
 		网上两种解决办法：
