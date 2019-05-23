@@ -150,3 +150,41 @@ consumer.xml配置文件如下
 
 # 例子 - 一个服务多个实现
 以上是dubbo最简单的demo，下面在demo的基础上做一些简答的修改。
+上面的代码是provider提供接口实现，然后由consumer消费。如果同一个接口有多个实现consumer是如何区分的？
+
+增加新的接口实现
+```
+public class SecondProviderService implements DemoService {
+    @Override
+    public String sayHi(String name) {
+
+        return "second " + name;
+    }
+}
+```
+在provider.xml文件中暴露新的实现
+```
+<dubbo:service interface="com.tiger.dubbo.api.DemoService" ref="demoService" />
+
+<bean id="demoService" class="com.tiger.dubbo.provider.ProviderService" />
+
+<dubbo:service interface="com.tiger.dubbo.api.DemoService" ref="secService" />
+
+<bean id="secService" class="com.tiger.dubbo.provider.SecondProviderService" />
+```
+现在的问题就是consumer如何区分两个实现。
+dubbo是通过分组概念来区分的，在service配置文件中增加group参数，区分每个实现，修改后代码如下
+```
+<dubbo:service interface="com.tiger.dubbo.api.DemoService" ref="demoService" group="first" />
+
+<bean id="demoService" class="com.tiger.dubbo.provider.ProviderService" />
+
+<dubbo:service interface="com.tiger.dubbo.api.DemoService" ref="secService" group="second"/>
+
+<bean id="secService" class="com.tiger.dubbo.provider.SecondProviderService" />
+```
+通过group参数为first和second来区分两个实现，consumer调用代码不变，只是在配置文件中需要指定消费的是哪个实现
+```
+<dubbo:reference id="demoService" interface="com.tiger.dubbo.api.DemoService" group="first" />
+```
+运行结果这里就不写了，大家可以自己试试~.~
