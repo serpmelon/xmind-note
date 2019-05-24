@@ -13,6 +13,10 @@
 		crtl + alt + click/b
 	选中光标代码
 		crtl + w
+	在范围内查找
+		选中范围，crtl + r
+	sublime中的crtl + d
+		选中文本，alt + f3，f3跳到下一个文本
 
 Q0	xml配置文件中出现 uri is not registed
 		网上两种解决办法：
