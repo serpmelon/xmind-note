@@ -1,0 +1,8 @@
+在学习dubbo过程中，经常有“我要学习什么的想法”，经常有看完一部分不知道后面要干嘛的时候。总的来说感觉自己缺少“dubbo能干什么？”的明确答案，所以在学习的时候就缺乏学习路线，这也跟自己长期的学习习惯有关：我要学习A技能，上网搜索 “A技能教程”或者“从零开始学A”。这样自己的学习完全依赖他人的总结，所以导致学习的成果同样依赖博客的质量，这就是高耦合啊同学们！！！我的学习质量为什么要依赖他人的学习成果。希望从今天开始改变自己的学习方式，从dubbo开始~.~
+
+# RPC
+dubbo是一个RPC框架，在学习这个框架之前我们需要先明白什么是RPC，为什么需要RPC，怎么实现RPC（what why how)。
+
+RPC是Remote Procedure Call，字面意思就是“远程过程调用”，翻译为“远程程序调用”可能更符合我们程序员。它的功能就是可以在A机器上访问B机器上的方法。
+
+那么为什么需要RPC，随着业务量扩大，单机系统拆分成集群，为了维护性和高可用性的系统服务化，都需要RPC来实现。[https://mp.weixin.qq.com/s?__biz=MzAxOTc0NzExNg==&mid=2665515957&idx=1&sn=1676e27703692542e4d985a0f59d4a8c&chksm=80d673f6b7a1fae051e5983b19c8edcc0ead5a60027cd1810b6391b0229e883b736e8b2905c4&mpshare=1&scene=1&srcid=&key=db09d759dd437ecf35e17e67021224c7eaa3cab314f610f0fbbec323abf675652ee74a01846b8b7beff8116a38ba7077509e01674ed3a89bd5585c1a3d01f1301a0a0021538a68f5a6e9f9f91af22892&ascene=1&uin=NjcyNzE4NDEy&devicetype=Windows+7&version=62060739&lang=zh_CN&pass_ticket=Xw1Toew%2BbKXJMs2zSE7LV9F5wlTvAPRbPIY5aJKEXiYkJFkD0A3zMLVrMyQeM6HC](https://mp.weixin.qq.com/s?__biz=MzAxOTc0NzExNg==&mid=2665515957&idx=1&sn=1676e27703692542e4d985a0f59d4a8c&chksm=80d673f6b7a1fae051e5983b19c8edcc0ead5a60027cd1810b6391b0229e883b736e8b2905c4&mpshare=1&scene=1&srcid=&key=db09d759dd437ecf35e17e67021224c7eaa3cab314f610f0fbbec323abf675652ee74a01846b8b7beff8116a38ba7077509e01674ed3a89bd5585c1a3d01f1301a0a0021538a68f5a6e9f9f91af22892&ascene=1&uin=NjcyNzE4NDEy&devicetype=Windows+7&version=62060739&lang=zh_CN&pass_ticket=Xw1Toew%2BbKXJMs2zSE7LV9F5wlTvAPRbPIY5aJKEXiYkJFkD0A3zMLVrMyQeM6HC "从单个服务器扩展到百万用户的系统")
