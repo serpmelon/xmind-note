@@ -37,3 +37,7 @@ Q4	插件安装显示无法加载、
 
 Q5	idea19安装tomcat环境
 		在idea内部使用plugins查询tomcat，下载安装smarttomcat。然后配置运行，设置tomcat服务器根目录，设置项目路径。
+
+MKD
+	H<sub>2</sub>O  下标
+	爆米<sup>TM</sup> 上标

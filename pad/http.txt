@@ -1,0 +1,1 @@
+postman访问请求返回正确的json数据，浏览器访问返回的是xml格式数据，这是因为请求头中的accept设置问题，设置为application/json则返回json，通过设置可以获取到不同格式的数据
