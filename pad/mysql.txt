@@ -253,3 +253,5 @@ mysql-02
 
 mysql-数据类型
 mysql int(M) M并不是长度，是表示显示的长度，比如等于3，如果存储1，则可以显示为001（需要设置），所以说不影响长度，长度始终是4个字节32位。
+
+alter user 'xx'@'%' identified with mysql_native_password by 'password';// mysql8加密方式和以前不一样，导致老版本的navicat链接不上，修改用户的加密方式就可以链接了

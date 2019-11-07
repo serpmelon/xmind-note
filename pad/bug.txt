@@ -42,3 +42,6 @@
 	上面就是修改了hibernate的命名规则
 	org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl  无修改命名
 	org.hibernate.boot.model.naming.SpringPhysicalNamingStrategy	遇到大写字母修改为“_”
+
+20190813
+	fastjson报错没有对应的序列化，错误原因是实体没有getter方法，加上就好使了，这里可以看看源码；
